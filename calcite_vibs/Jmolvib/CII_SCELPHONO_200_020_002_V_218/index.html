@@ -1,0 +1,163 @@
+<HTML>
+ <HEAD>
+<title></title>
+<link href="style.css" rel="stylesheet" media="all" type="text/css"> 
+     <script type="text/javascript" src="jsmol/JSmol.min.js"></script>
+     <script type="text/javascript" src="jmolvib.js"></script>
+     <SCRIPT>
+//fileName ="vic_freq.xyz";
+ args =window.location.href.substring(window.location.href.indexOf("?")+1).replace(/%22/g,"");
+ targs=args.split('&');
+ withJmolFile=false;
+ jmolFileName ="";
+ for(var iarg=0;iarg<targs.length;iarg++){
+  tkey=targs[iarg].split('=');
+  switch (tkey[0]) {
+   case 'output':
+    fileName =tkey[1];
+    crystalOutput=true;
+    xyzFile=false;
+    break;
+   case 'name':
+   case 'cartesian':
+    fileName =tkey[1];
+    crystalOutput=false;
+    xyzFile=true;
+    break;
+   case 'spt':
+    jmolFileName =tkey[1];
+    withJmolFile=true;
+    break;
+  }
+ }
+//fileName =window.location.href.substring(window.location.href.indexOf("=")+1).replace(/%22/g,"");
+        var Info = {
+  color: "#FFFFFF", // white background (note this changes legacy default which was black)
+  height: 430,      // pixels (but it may be in percent, like "100%")
+  width: 430,
+  use: "HTML5",     // "HTML5" or "Java" (case-insensitive)
+  j2sPath: "jsmol/j2s",          // only used in the HTML5 modality
+  jarPath: "java",               // only used in the Java modality
+  jarFile: "JmolApplet0.jar",    // only used in the Java modality
+  isSigned: false,               // only used in the Java modality
+  readyFunction: jmolIsReady,
+  debug: false
+       };	
+     </SCRIPT>
+ </HEAD>
+<BODY>
+ <FORM NAME="ctrl" >
+  <TABLE border="1">
+ <TR><TD ALIGN=center><DIV ID='cite'></DIV></TD>
+ <TD COLSPAN=2>
+ <DIV ID='titre'></DIV>
+<BR/>
+<DIV ID='auth'></DIV>
+</TD>
+</TR>
+<TR>
+<TD>
+Vibrations<BR>
+<TABLE border="0">
+<TR><TD>  <INPUT TYPE="checkbox" ID="vib_on"  checked  OnClick='update()'>Animation</TD><TD><FONT size=-1> Scale: </FONT></TD><TD>
+  <INPUT TYPE="radio" NAME="anim_scale" ID="as1"  OnClick='update()'><FONT size=-1>1</FONT>
+</TD><TD>
+  <INPUT TYPE="radio" NAME="anim_scale" ID="as2"  checked  OnClick='update()'><FONT size=-1>2</FONT>
+</TD><TD>
+  <INPUT TYPE="radio" NAME="anim_scale" ID="as3"  OnClick='update()'><FONT size=-1>3</FONT>
+</TD></TR>
+<TR><TD>
+<INPUT TYPE="checkbox" ID="vect_on"  OnClick='update()'>Vectors</TD><TD><FONT size=-1> Scale:</FONT>
+</TD><TD>
+  <INPUT TYPE="radio" NAME="vect_scale" ID="vs1"  OnClick='update()'><FONT size=-1>1</FONT>
+</TD><TD>
+  <INPUT TYPE="radio" NAME="vect_scale" ID="vs2"  checked  OnClick='update()'><FONT size=-1>2</FONT>
+</TD><TD>
+  <INPUT TYPE="radio" NAME="vect_scale" ID="vs3"  OnClick='update()'><FONT size=-1>3</FONT>
+</TD></TR></TABLE>
+ <BR><BR>View<BR>
+<!--
+  <INPUT TYPE="radio" NAME="view_struc" ID="viewcell"  OnClick='save_orient();Jmol.script(jmolApplet0,loadstruct()+bigscript()+orient_mt)'>Entire Cell
+  <INPUT TYPE="radio" NAME="view_struc" ID="viewfew"  OnClick='save_orient();Jmol.script(jmolApplet0,loadstruct()+bigscript()+orient_mt)'>Few atoms
+<BR>
+-->
+<span id='cellCtrl'><INPUT TYPE="checkbox" ID="cell"  OnClick='update()'>Cell</span>
+  <INPUT TYPE="checkbox" ID="persp"  OnClick='update()'>Perspective
+<BR>
+    Along
+ <INPUT TYPE="button" NAME="along_x" ID="along_x" VALUE="x" 
+ OnClick='Jmol.script(jmolApplet0,"moveto 1 0 -1000 0 90.0;")'>
+ <INPUT TYPE="button" NAME="along_y" ID="along_y" VALUE="y" 
+ OnClick='Jmol.script(jmolApplet0,"moveto 1 1000 0 0 90.0;")'>
+ <INPUT TYPE="button" NAME="along_z" ID="along_z" VALUE="z" 
+ OnClick='Jmol.script(jmolApplet0,"moveto 1 1 0 0 0;")'>
+<div id="view_perso"></div>
+
+
+<!--  <TABLE border="0">
+     <TR><TD COLSPAN=3> Polyhedra </TD></TR>
+     <TR><TD></TD><TD ALIGN="center">None</TD><TD>Transp.</TD><TD>Solid</TD></TR>
+ <TR><TD WIDTH=20%><SCRIPT>document.write(symbat[1])</SCRIPT></TD> <TD ALIGN="center"><INPUT TYPE="radio" NAME="poly1" ID="poly1_0"  OnClick='Jmol.script(jmolApplet0,bigscript())'></TD>
+ <TD ALIGN="center"><INPUT TYPE="radio" NAME="poly1" ID="poly1_1"  OnClick='Jmol.script(jmolApplet0,bigscript())'></TD>
+ <TD ALIGN="center"><INPUT TYPE="radio" NAME="poly1" ID="poly1_2"  checked  OnClick='Jmol.script(jmolApplet0,bigscript())'></TD>
+</TR>
+ <TR><TD WIDTH=20%><SCRIPT>document.write(symbat[2])</SCRIPT></TD> <TD ALIGN="center"><INPUT TYPE="radio" NAME="poly2" ID="poly2_0"  OnClick='Jmol.script(jmolApplet0,bigscript())'></TD>
+ <TD ALIGN="center"><INPUT TYPE="radio" NAME="poly2" ID="poly2_1"  OnClick='Jmol.script(jmolApplet0,bigscript())'></TD>
+ <TD ALIGN="center"><INPUT TYPE="radio" NAME="poly2" ID="poly2_2"  checked  OnClick='Jmol.script(jmolApplet0,bigscript())'></TD>
+</TR>
+ <TR><TD WIDTH=20%><SCRIPT>document.write(symbat[3])</SCRIPT></TD> <TD ALIGN="center"><INPUT TYPE="radio" NAME="poly3" ID="poly3_0"  OnClick='Jmol.script(jmolApplet0,bigscript())'></TD>
+ <TD ALIGN="center"><INPUT TYPE="radio" NAME="poly3" ID="poly3_1"  OnClick='Jmol.script(jmolApplet0,bigscript())'></TD>
+ <TD ALIGN="center"><INPUT TYPE="radio" NAME="poly3" ID="poly3_2"  checked  OnClick='Jmol.script(jmolApplet0,bigscript())'></TD>
+</TR>
+</TABLE>
+<BR>-->
+<div id="sizeAt">Atoms size<BR>
+<INPUT TYPE="radio" NAME="atsize" ID="at_tiny" VALUE=0 
+ OnClick='update()'>Tiny
+<INPUT TYPE="radio" NAME="atsize" ID="at_small" VALUE=1
+ checked=true  OnClick='update()'>Small
+<INPUT TYPE="radio" NAME="atsize" ID="at_normal" VALUE=2
+ OnClick='update()'>Big<BR>
+<BR>Bond width<BR>
+<INPUT TYPE="radio" NAME="bondsize" ID="bond_tiny" VALUE=0 
+ checked  OnClick='update()'>Thin
+<INPUT TYPE="radio" NAME="bondsize" ID="bond_small" VALUE=1 
+  OnClick='update()'>Thick
+</div>
+</TD>
+<TD ALIGN="center" WIDTH=20%>
+<SELECT ID="modes" SIZE=15 onChange=update()>
+<OPTION value="1">Modes</OPTION>
+</SELECT>
+</BR>
+</BR>
+<INPUT TYPE="radio" NAME="Only" ID="OnlyAll" Value="All" OnClick=updateModes() checked=true>All</BR>
+<INPUT TYPE="radio" NAME="Only" ID="OnlyIR" Value="IR" OnClick=updateModes()>IR
+<INPUT TYPE="radio" NAME="Only" ID="OnlyRaman"Value="Raman"  OnClick=updateModes()>Raman</BR>
+<!-- <INPUT TYPE="radio" NAME="Only" ID="OnlyTO" Value="TO" OnClick=updateModes()>TO
+<INPUT TYPE="radio" NAME="Only" ID="OnlyLO" Value="LO" OnClick=updateModes()>LO</BR> -->
+<INPUT TYPE="radio" NAME="Only" ID="OnlySym" OnClick=updateModes()> Symmetry</BR>
+<SELECT ID="symmetries" SIZE=5 OnClick=updateModes()>
+<OPTION value="1">Symmetry</OPTION>
+</SELECT>
+<BR>
+<div id="legend">
+</div>
+</TD>
+<TD>
+    <SCRIPT>  
+     if(withJmolFile){scr="script '"+jmolFileName+"';";}else{scr="";}
+     jmolApplet0=Jmol.getApplet("jmolApplet0", Info)
+     Jmol.script(jmolApplet0,"javascript init(scr);axes off;unitcell on;");
+    </SCRIPT>  
+</TD>
+</TR>
+<TR>
+<TD colspan=3><div id="caption"></div>
+</TD>
+</TR>
+</TABLE>
+</FORM>
+</BODY>
+</HTML>
+

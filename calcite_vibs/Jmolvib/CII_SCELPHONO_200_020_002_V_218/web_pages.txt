@@ -1,0 +1,9 @@
+#
+file:///home/david/dlv_phonons/JSMOL_MIKE/Jmolvib/CII_SCELPHONO_200_020_002_V_218/index.html?name=calcite_2x2x2.xyz&spt=calcite_2x2x2.spt
+
+# version_2 :
+file:///home/david/dlv_phonons/JSMOL_MIKE/Jmolvib/CII_SCELPHONO_200_020_002_V_218/index.html?name=calcite_2x2x2_version_2.xyz&spt=calcite_2x2x2_version_2.spt
+
+
+------ davidcdeb:
+http://davidcdeb.com/calcite_vibs/Jmolvib/CII_SCELPHONO_200_020_002_V_218/index.html?name=calcite_2x2x2_version_2.xyz&spt=calcite_2x2x2_version_2.spt

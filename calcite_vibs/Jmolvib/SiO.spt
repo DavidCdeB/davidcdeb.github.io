@@ -1,0 +1,32 @@
+select all
+label %i
+function drawc(a1,a2,a3,a4,b1,b2,b3,b4,ndr0){
+n=0;d=0.03;col="black";
+n=n+1;ndr=ndr0+n; draw id @ndr  diameter @d @a1 @a2 color @col;
+n=n+1;ndr=ndr0+n; draw id @ndr  diameter @d @a2 @a3 color @col;
+n=n+1;ndr=ndr0+n; draw id @ndr  diameter @d @a3 @a4 color @col;
+n=n+1;ndr=ndr0+n; draw id @ndr  diameter @d @a4 @a1 color @col;
+n=n+1;ndr=ndr0+n; draw id @ndr  diameter @d @b1 @b2 color @col;
+n=n+1;ndr=ndr0+n; draw id @ndr  diameter @d @b2 @b3 color @col;
+n=n+1;ndr=ndr0+n; draw id @ndr  diameter @d @b3 @b4 color @col;
+n=n+1;ndr=ndr0+n; draw id @ndr  diameter @d @b4 @b1 color @col;
+n=n+1;ndr=ndr0+n; draw id @ndr  diameter @d @b1 @a1 color @col;
+n=n+1;ndr=ndr0+n; draw id @ndr  diameter @d @b2 @a2 color @col;
+n=n+1;ndr=ndr0+n; draw id @ndr  diameter @d @b3 @a3 color @col;
+n=n+1;ndr=ndr0+n; draw id @ndr  diameter @d @b4 @a4 color @col
+}
+drawc(@13,@5,@8,@2,@1,@10,@4,@14,'gugu')
+label off
+javascript "for(var i=0;i<=2;i++){if(document.getElementById('modes').options[0].text<1){document.getElementById('modes').options[0]=null}};"
+javascript  authors="<i> Giulio Di Palma, Paolo Ruzzi, Alessandro Difalco, Fabio Colasuonno, Simone Salustro and Roberto Dovesi</i>";
+javascript  title="Cazzeggio invernale";
+javascript  caption="Vibration modes of the T Hydrogen interstitial defect.";
+javascript  reference="Chemical chemistry 18(31) (2016)";
+javascript  ampl_vib=3;
+
+yyy=script("set prima_volta?");
+if(yyy.length<5){
+javascript  document.getElementById("at_normal").checked=true;
+prima_volta=false;
+}
+
