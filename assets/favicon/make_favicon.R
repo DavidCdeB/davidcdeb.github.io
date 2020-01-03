@@ -1,4 +1,4 @@
-# convert karl_lego.png into favicon.ico
+# convert mia_alh.png into favicon.ico
 library(magick)
 
 # read original image
