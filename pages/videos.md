@@ -6,23 +6,17 @@
 
 <tr>
 
-<td><iframe src="https://player.vimeo.com/video/93206523" width="160" height="90"></iframe></td>
-
-<td><iframe src="https://player.vimeo.com/video/93206523" width="160" height="90"></iframe></td>
-
-<td><iframe src="https://player.vimeo.com/video/93206523" width="160" height="90"></iframe></td>
-
-</tr>
-
-<tr>
-
 <td style="text-align: center;">**Video 1**</td>
-
+<td><iframe src="https://player.vimeo.com/video/93206523" width="160" height="90"></iframe></td>
 <td style="text-align: center;">**Video 2**</td>
-
+<td><iframe src="https://player.vimeo.com/video/93206523" width="160" height="90"></iframe></td>
 <td style="text-align: center;">**Video 3**</td>
+<td><iframe src="https://player.vimeo.com/video/93206523" width="160" height="90"></iframe></td>
 
 </tr>
+
+
+
 
 <tr>
 
